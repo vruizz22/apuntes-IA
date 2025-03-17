@@ -1,0 +1,9 @@
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.pdf
+!T1___IIC2613___2025_1.pdf
+!T2___IIC2613___2025_1.pdf
+!T3___IIC2613___2025_1.pdf
+!T4___IIC2613___2025_1.pdf

@@ -1,0 +1,189 @@
+% Plantilla para documentos LaTeX para enunciados
+% Por Pedro Pablo Aste Kompen - ppaste@uc.cl
+% Licencia Creative Commons BY-NC-SA 3.0
+% http://creativecommons.org/licenses/by-nc-sa/3.0/
+
+\documentclass[12pt]{article}
+
+% Margen de 1 pulgada por lado
+\usepackage{fullpage}
+% Incluye gráficas
+\usepackage{graphicx}
+% Packages para matemáticas, por la American Mathematical Society
+\usepackage{amssymb}
+\usepackage{amsmath}
+% Desactivar hyphenation
+\usepackage[none]{hyphenat}
+% Saltar entre párrafos - sin sangrías
+\usepackage{parskip}
+% Español y UTF-8
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+% Links en el documento
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\setlength{\headheight}{15.2pt}
+\setlength{\headsep}{5pt}
+\pagestyle{fancy}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Exp}[1]{\mathcal{E}_{#1}}
+\newcommand{\List}[1]{\mathcal{L}_{#1}}
+\newcommand{\EN}{\Exp{\N}}
+\newcommand{\LN}{\List{\N}}
+
+\newcommand{\comment}[1]{}
+\newcommand{\lb}{\\~\\}
+\newcommand{\eop}{_{\square}}
+\newcommand{\hsig}{\hat{\sigma}}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\lra}{\leftrightarrow}
+
+% Cambiar por nombre completo + número de alumno
+\newcommand{\alumno}{Victor Ruiz - 2320012J}
+\rhead{Tarea 4 - \alumno}
+
+\begin{document}
+\thispagestyle{empty}
+% Membrete
+% PUC-ING-DCC-IIC1103
+\begin{minipage}{2.3cm}
+\includegraphics[width=2cm]{img/logo.pdf}
+\vspace{0.5cm} % Altura de la corona del logo, así el texto queda alineado verticalmente con el círculo del logo.
+\end{minipage}
+\begin{minipage}{\linewidth}
+\textsc{\raggedright \footnotesize
+Pontificia Universidad Católica de Chile \\
+Departamento de Ciencia de la Computación \\
+IIC1253 - Matemáticas Discretas \\}
+\end{minipage}
+
+
+% Titulo
+\begin{center}
+\vspace{0.5cm}
+{\huge\bf Tarea 4}\\
+\vspace{0.2cm}
+\today\\
+\vspace{0.2cm}
+\footnotesize{2º semestre 2024 - Profesores P. Bahamondes - D. Bustamante - M. Romero}\\
+\vspace{0.2cm}
+\footnotesize{\alumno}
+\rule{\textwidth}{0.05mm}
+\end{center}
+
+
+
+\section*{Respuestas}
+
+\subsection*{Pregunta 1}
+\subsubsection*{(a)}
+
+Sean \(A\), \(B\) y \(C\) conjuntos. Queremos verificar si las siguientes dos afirmaciones son verdaderas o falsas.
+
+1. \((A \setminus B) \setminus C \subseteq A \setminus (B \setminus C)\)
+
+Para probar si esta inclusión es cierta, tomemos un elemento arbitrario \(x \in (A \setminus B) \setminus C\). Esto implica que:
+\[
+x \in A \setminus B \quad \text{y} \quad x \notin C
+\]
+Es decir, \(x \in A\), \(x \notin B\), y \(x \notin C\).
+
+Lo anterior es clave, ya que garantiza que \(x \notin C\). Ahora, verifiquemos si \(x \in A \setminus (B \setminus C)\). Para que esto sea cierto, debemos tener \(x \in A\) y \(x \notin B \setminus C\), lo que implica que \(x \notin B\) o \(x \in C\). 
+Como \(x \notin B\), no puede estar en \(B \setminus C\) (porque \(B \setminus C\) es un subconjunto de \(B\)) y como \(x \notin C\) tenemos sencillamente el caso donde \(x \notin B \setminus C\)
+. Por lo tanto, \(x \in A \setminus (B \setminus C)\).
+
+Esto demuestra que \((A \setminus B) \setminus C \subseteq A \setminus (B \setminus C)\) es verdadero.
+
+2. \(A \setminus (B \setminus C) \subseteq (A \setminus B) \setminus C\)
+
+Ahora, tomemos un elemento arbitrario \(x \in A \setminus (B \setminus C)\). Esto implica que:
+\[
+x \in A \quad \text{y} \quad x \notin B \setminus C
+\]
+Esto significa que \(x \notin B \setminus C\), lo que implica que \(x \notin B\) o \(x \in C\).
+
+Si \(x \notin B\), entonces \(x \in A \setminus B\). Pero si \(x \in C\), no podemos concluir que \(x \in (A \setminus B) \setminus C\), ya que \(x\) está en \(C\), lo cual contradice la condición de que \(x \notin C\).
+
+Por lo tanto, la inclusión \(A \setminus (B \setminus C) \subseteq (A \setminus B) \setminus C\) es \textbf{falsa}. 
+Un contraejemplo sería \(A = \{1, 2\}, B = \{2\}, C = \{1\}\), donde \(1 \in A \setminus (B \setminus C)\), pero \(1 \notin (A \setminus B) \setminus C\).
+
+\subsubsection*{(b)}
+
+(1) Demostrar que \(R \cap R^{-1}\) es una relación de equivalencia en \(A\):
+
+Para que \(R \cap R^{-1}\) sea una relación de equivalencia, debe ser \textbf{reflexiva}, \textbf{simétrica} y \textbf{transitiva}:
+
+- Reflexividad: Dado que \(R\) es un preorden, es refleja, es decir, para todo \(a \in A\), \(a R a\). Como \(R^{-1}\) también contiene todos los pares reflejos \((a, a)\), entonces \(R \cap R^{-1}\) también es refleja.
+
+- Simetría: Supongamos que \((a, b) \in R \cap R^{-1}\). Por la definición de la intersección de relaciones, esto significa que \((a, b) \in R\) y \((b, a) \in R\).  
+Ahora, queremos probar que \((b, a) \in R \cap R^{-1}\). Dado que ya sabemos que \((b, a) \in R\) (porque lo asumimos anteriormente), también necesitamos verificar que \((a, b) \in R^{-1}\), lo cual es cierto porque \((a, b) \in R\) implica que \((b, a) \in R^{-1}\) por definición de la inversa de una relación.
+Por lo tanto, \((b, a) \in R \cap R^{-1}\), lo que demuestra que la relación \(R \cap R^{-1}\) es simétrica, ya que para cualquier par \((a, b) \in R \cap R^{-1}\), también se cumple que \((b, a) \in R \cap R^{-1}\).
+
+- Transitividad: Si \((a, b) \in R \cap R^{-1}\) y \((b, c) \in R \cap R^{-1}\), entonces \((a, b), (b, c) \in R\) y \((b, a), (c, b) \in R^{-1}\). Por la transitividad de \(R\), tenemos \((a, c) \in R\) y \((c, a) \in R^{-1}\), por lo tanto, \((a, c) \in R \cap R^{-1}\).
+
+Por lo tanto, \(R \cap R^{-1}\) es una relación de equivalencia.
+
+(2) Demostrar que \(S\) es un orden parcial:
+
+La relación \(S\) sobre el conjunto cociente \(A / (R \cap R^{-1})\) está definida como \((C, D) \in S\) si existe \(c \in C\) y \(d \in D\) tal que \((c, d) \in R\).
+
+Para que \(S\) sea un orden parcial, debe ser \textbf{reflexiva}, \textbf{antisimétrica} y \textbf{transitiva}:
+
+- Reflexividad: Para cualquier clase de equivalencia \(C\), elige \(c \in C\). Dado que \(R\) es reflexiva, \((c, c) \in R\), por lo que \((C, C) \in S\), lo que demuestra que \(S\) es reflexiva.
+
+- Antisimetría: Supongamos que \((C, D) \in S\) y \((D, C) \in S\). Esto significa que existen \(c \in C\) y \(d \in D\) tales que \((c, d) \in R\) y \((d, c) \in R\). Como \(R \cap R^{-1}\) es una relación de equivalencia, \(c\) y \(d\) deben pertenecer a la misma clase de equivalencia, es decir, \(C = D\). Por lo tanto, \(S\) es antisimétrica.
+
+- Transitividad: Si \((C, D) \in S\) y \((D, E) \in S\), entonces existen \(c \in C\), \(d \in D\) y \(e \in E\) tales que \((c, d) \in R\) y \((d, e) \in R\). Por la transitividad de \(R\), tenemos \((c, e) \in R\), por lo que \((C, E) \in S\), lo que demuestra que \(S\) es transitiva.
+
+Por lo tanto, \(S\) es un orden parcial.
+
+
+\newpage
+
+\subsection*{Pregunta 2}
+
+\subsubsection*{(a)}
+
+Sea \((A, \preceq)\) un conjunto con un \textbf{orden total}. Queremos demostrar que para cualquier subconjunto no vacío \(S \subseteq A\) y cualquier elemento \(x \in A\), \(x\) es un \textbf{elemento minimal} de \(S\) si y solo si \(x\) es el \textbf{mínimo} de \(S\).
+
+1. \textbf{Si \(x\) es el mínimo de \(S\), entonces es minimal:}
+
+Si \(x\) es el mínimo de \(S\), por definición, para todo \(y \in S\), se tiene que \(x \preceq y\). Esto implica que no existe ningún \(y \in S\) tal que \(y \prec x\), por lo que \(x\) es un elemento minimal de \(S\).
+
+2. \textbf{Si \(x\) es minimal en \(S\), entonces es el mínimo de \(S\):}
+
+Si \(x\) es minimal en \(S\), esto significa que no existe ningún \(y \in S\) tal que \(y \prec x\). Dado que el orden \(\preceq\) es total, para cualquier \(y \in S\), se tiene que \(x \preceq y\) o \(y \preceq x\). Dado que no puede suceder que \(y \prec x\), necesariamente debe cumplirse que \(x \preceq y\) para todo \(y \in S\). Esto significa que \(x\) es el mínimo de \(S\).
+
+Por lo tanto, \(x\) es minimal en \(S\) si y solo si es el mínimo de \(S\).
+
+\subsubsection*{(b)}
+
+Sea \(F\) el conjunto de todas las funciones \(f : \mathbb{N} \to \mathbb{N}\), y definimos la relación \(\preceq\) sobre \(F\) como:
+\[
+f \preceq g \iff f(n) \leq g(n) \text{ para todo } n \in \mathbb{N}.
+\]
+
+(1) \textbf{Demostrar que \(\preceq\) es un orden parcial sobre \(F\):}
+
+Para que \(\preceq\) sea un \textbf{orden parcial}, debe ser \textbf{reflexiva}, \textbf{antisimétrica} y \textbf{transitiva}:
+
+- \textbf{Reflexividad}: Para cualquier función \(f \in F\), claramente \(f(n) \leq f(n)\) para todo \(n \in \mathbb{N}\), lo que implica que \(f \preceq f\). Por lo tanto, \(\preceq\) es reflexiva.
+  
+- \textbf{Antisimetría}: Supongamos que \(f \preceq g\) y \(g \preceq f\), lo que significa que \(f(n) \leq g(n)\) y \(g(n) \leq f(n)\) para todo \(n \in \mathbb{N}\). Esto implica que \(f(n) = g(n)\) para todo \(n\), por lo tanto, \(f = g\). Esto demuestra que \(\preceq\) es antisimétrica.
+  
+- \textbf{Transitividad}: Si \(f \preceq g\) y \(g \preceq h\), entonces \(f(n) \leq g(n)\) y \(g(n) \leq h(n)\) para todo \(n \in \mathbb{N}\). Por lo tanto, \(f(n) \leq h(n)\) para todo \(n \in \mathbb{N}\), lo que implica que \(f \preceq h\). Esto demuestra que \(\preceq\) es transitiva.
+
+Por lo tanto, \(\preceq\) es un orden parcial sobre \(F\).
+
+(2) \textbf{¿Es \(\preceq\) un orden total?}
+
+La relación \(\preceq\) \textbf{no es un orden total}. Un orden total requiere que para cualquier par de funciones \(f, g \in F\), se cumpla que \(f \preceq g\) o \(g \preceq f\). Sin embargo, podemos encontrar funciones \(f\) y \(g\) tales que no se cumple ninguna de las dos. Por ejemplo, si definimos \(f(n) = n\) y \(g(n) = n + 1\), entonces no es cierto que \(f(n) \leq g(n)\) para todo \(n\) ni que \(g(n) \leq f(n)\) para todo \(n\). Por lo tanto, \(\preceq\) no es un orden total.
+
+(3) \textbf{¿Tiene \(F\) un mínimo bajo \(\preceq\)?}
+
+El conjunto \(F\) \textbf{no tiene un mínimo} bajo la relación \(\preceq\). Un mínimo de \(F\) sería una función \(f_0\) tal que \(f_0 \preceq f\) para toda función \(f \in F\). Sin embargo, para cualquier función \(f_0\), podemos definir una función \(f_1\) tal que \(f_1(n) = f_0(n) - 1\) para todo \(n \in \mathbb{N}\), lo que contradice la posibilidad de que \(f_0\) sea el mínimo de \(F\). Por lo tanto, \(F\) no tiene un mínimo.
+
+
+% Fin del documento
+\end{document}
